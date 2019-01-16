@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import sys
 # include parent dir
-sys.path.append('./')
+sys.path.append('../')
 import nn_process
 print ('Loading Extracting Feature Module...')
 extract_feature = nn_process.create('extract_feature')
