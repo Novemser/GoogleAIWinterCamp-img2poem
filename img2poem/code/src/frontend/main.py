@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import sys
 # include parent dir
-sys.path.append('../')
+sys.path.append('./')
 import nn_process
 print ('Loading Extracting Feature Module...')
 extract_feature = nn_process.create('extract_feature')
@@ -41,9 +41,10 @@ def index():
     if request.method == 'POST':
         f = request.files['file']
         basepath = os.path.dirname(__file__)
+        basepath = ''
         s_path = os.path.join(s ,secure_filename(f.filename))
         upload_path = os.path.join(basepath, s_path)
-        f.save(upload_path)
+        f.save(s_path)
 
         return render_template('index.html', user_image = upload_path, poem = get_poem(upload_path))
     return render_template('index.html', user_image = '', poem = 'please upload')
