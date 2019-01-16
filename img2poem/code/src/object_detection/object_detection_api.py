@@ -16,7 +16,7 @@ import sys
 plt.switch_backend('agg')
 # This is needed since the notebook is stored in the object_detection folder.
 
-sys.path.append("..")
+# sys.path.append("..")
 from object_detection.utils import ops as utils_ops
 
 if StrictVersion(tf.__version__) < StrictVersion('1.9.0'):
@@ -119,6 +119,30 @@ def run_inference_for_single_image(image, graph):
       if 'detection_masks' in output_dict:
         output_dict['detection_masks'] = output_dict['detection_masks'][0]
   return output_dict
+
+def process(img_path):
+  print(img_path)
+  image = Image.open(img_path)
+  image_np = load_image_into_numpy_array(image)
+  # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
+  image_np_expanded = np.expand_dims(image_np, axis=0)
+  # Actual detection.
+  output_dict = run_inference_for_single_image(image_np, detection_graph)
+  # Visualization of the results of a detection.
+  vis_util.visualize_boxes_and_labels_on_image_array(
+      image_np,
+      output_dict['detection_boxes'],
+      output_dict['detection_classes'],
+      output_dict['detection_scores'],
+      category_index,
+      instance_masks=output_dict.get('detection_masks'),
+      use_normalized_coordinates=True,
+      line_thickness=8)
+  plt.figure(figsize=IMAGE_SIZE)
+  plt.imshow(image_np)
+  plt.savefig('./demo.png')
+  print('pefect, test one single image')
+
 
 if __name__ == "__main__":
   
