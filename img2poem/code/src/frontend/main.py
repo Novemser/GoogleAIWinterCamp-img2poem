@@ -48,7 +48,7 @@ def index():
         result = ''
         if isinstance(poems, list):
             for p in poems:
-                result = result + p.replace('\n', '<br>')
+                result = result + p.replace('\n', ',')
 
         return render_template('index.html', user_image = s_path, poem = result)
     return render_template('index.html', user_image = '', poem = 'please upload')
