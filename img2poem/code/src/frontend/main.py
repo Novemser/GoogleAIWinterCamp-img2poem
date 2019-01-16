@@ -44,8 +44,13 @@ def index():
         s_path = os.path.join(s ,secure_filename(f.filename))
         upload_path = os.path.join(basepath, s_path)
         f.save(upload_path)
+        poems = get_poem(upload_path)
+        result = ''
+        if isinstance(poems, list):
+            for p in poems:
+                result = result + p.replace('\n', '<br>')
 
-        return render_template('index.html', user_image = s_path, poem = get_poem(upload_path).replace('\n', '<br>'))
+        return render_template('index.html', user_image = s_path, poem = result)
     return render_template('index.html', user_image = '', poem = 'please upload')
 
 @app.route('/upload', methods=['POST', 'GET'])
