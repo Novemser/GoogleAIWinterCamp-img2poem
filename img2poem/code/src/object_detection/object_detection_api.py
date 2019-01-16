@@ -141,7 +141,7 @@ def process(img_path):
       line_thickness=8)
   plt.figure(figsize=IMAGE_SIZE)
   plt.imshow(image_np)
-  plt.savefig('new' + img_path)
+  plt.savefig('frontend/static/uploads/rcnned.jpg')
   print('pefect, test one single image')
 
 

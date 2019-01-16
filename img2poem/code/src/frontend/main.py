@@ -58,7 +58,7 @@ def index():
             for p in poems:
                 result = result + p.replace('\n', ',')
 
-        return render_template('index.html', user_image = s_path, poem = result)
+        return render_template('index.html', user_image = 'frontend/static/uploads/rcnned.jpg', poem = result)
     return render_template('index.html', user_image = '', poem = 'please upload')
 
 @app.route('/upload', methods=['POST', 'GET'])
