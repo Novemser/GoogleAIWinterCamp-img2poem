@@ -31,15 +31,16 @@ from utils import label_map_util
 from utils import visualization_utils as vis_util
 
 # What model to download.
+basedir = 'object_detection'
 MODEL_NAME = 'ssd_mobilenet_v1_coco_2017_11_17'
 MODEL_FILE = MODEL_NAME + '.tar.gz'
 DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
-PATH_TO_FROZEN_GRAPH = MODEL_NAME + '/frozen_inference_graph.pb'
+PATH_TO_FROZEN_GRAPH = os.path.join(basedir, MODEL_NAME + '/frozen_inference_graph.pb')
 
 # List of the strings that is used to add correct label for each box.
-PATH_TO_LABELS = os.path.join('data', 'mscoco_label_map.pbtxt')
+PATH_TO_LABELS = os.path.join(basedir, 'data', 'mscoco_label_map.pbtxt')
 
 opener = urllib.request.URLopener()
 opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
