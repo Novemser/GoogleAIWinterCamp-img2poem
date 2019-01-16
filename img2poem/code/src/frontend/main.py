@@ -45,7 +45,7 @@ def index():
         upload_path = os.path.join(basepath, s_path)
         f.save(upload_path)
 
-        return render_template('index.html', user_image = s_path, poem = get_poem(upload_path))
+        return render_template('index.html', user_image = s_path, poem = get_poem(upload_path).replace('\n', '<br>'))
     return render_template('index.html', user_image = '', poem = 'please upload')
 
 @app.route('/upload', methods=['POST', 'GET'])
