@@ -41,12 +41,11 @@ def index():
     if request.method == 'POST':
         f = request.files['file']
         basepath = os.path.dirname(__file__)
-        basepath = ''
         s_path = os.path.join(s ,secure_filename(f.filename))
         upload_path = os.path.join(basepath, s_path)
-        f.save(s_path)
+        f.save(upload_path)
 
-        return render_template('index.html', user_image = upload_path, poem = get_poem(upload_path))
+        return render_template('index.html', user_image = s_path, poem = get_poem(upload_path))
     return render_template('index.html', user_image = '', poem = 'please upload')
 
 @app.route('/upload', methods=['POST', 'GET'])
